@@ -1,12 +1,10 @@
-package main
+package spaceadventure
 
 import "fmt"
 
-func main() {
+func Start() {
 	printWelcome()
-	// avoid temporary variables
-	// name := getName()
-	printGreeting(responseToPrompt())
+	printGreeting(responseToPrompt("What is your name?"))
 	fmt.Println("Let's go on an adventure!")
 	travel()
 }
@@ -14,11 +12,12 @@ func main() {
 func printWelcome() {
 	fmt.Println("Welcome to the Solar System!")
 	fmt.Println("There are 8 planets to explore.")
-	fmt.Println("What is your name?")
+	// fmt.Println("What is your name?")
 }
 
-func responseToPrompt() string {
+func responseToPrompt(prompt string) string {
 	var response string
+	fmt.Println(prompt)
 	fmt.Scan(&response)
 	return response
 }
@@ -30,14 +29,12 @@ func printGreeting(name string) {
 
 func travel() {
 	var choice string
-	fmt.Println("Shall I randomly choose a planet for you to visit? (Y or N)")
 	for choice != "Y" && choice != "N" {
-		choice = responseToPrompt()
+		choice = responseToPrompt("Shall I randomly choose a planet for you to visit? (Y or N)")
 		if choice == "Y" {
 			travelToRandomPlanet()
 		} else if choice == "N" {
-			fmt.Println("Name the planet you would like to visit.")
-			planetName := responseToPrompt()
+			planetName := responseToPrompt("Name the planet you would like to visit.")
 			travelToPlanet(planetName)
 		} else {
 			fmt.Println("Sorry, I didn't get that.")
@@ -54,24 +51,3 @@ func travelToPlanet(planetName string) {
 	fmt.Printf("Traveling to %s...\n", planetName)
 	fmt.Println("Arrived at Neptune. A very cold planet, furthest from the sun.")
 }
-
-// func getName() string {
-// 	var name string
-// 	fmt.Println("What is your name?")
-// 	fmt.Scan(&name)
-// 	return name
-// }
-
-// func getTravelChoice() string {
-// 	var choice string
-// 	fmt.Println("Shall I randomly choose a planet for you to visit? (Y or N)")
-// 	fmt.Scan(&choice)
-// 	return choice
-// }
-
-// func getPlanetName() string {
-// 	var name string
-// 	fmt.Println("Name the planet you would like to visit.")
-// 	fmt.Scan(&name)
-// 	return name
-// }
